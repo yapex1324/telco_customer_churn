@@ -45,3 +45,63 @@ Dengan mengambil asumsi diatas sebagai dasar, kita dapat mencoba mengukur konsek
 2. Ketika pelanggan pergi, itu berarti pendapatan turun dan kita harus mengeluarkan biaya lagi untuk akuisisi pelanggan baru, sehingga secara keseluruhan kita mengalami kerugian sebesar $63 + $64.88 = $127.88
 
 Berdasarkan pertimbangan konsekuensinya, maka kita akan berusaha untuk membuat model yang dapat mengurangi jumlah pelanggan yang beralih dari perusahaan tersebut, khususnya pelanggan yang sebenarnya akan beralih tetapi diprediksi tidak akan beralih (False Negative). Selain itu, model tersebut juga harus dapat meminimalisir pemberian insentif yang tidak tepat. Oleh karena itu, metric utama yang akan kita gunakan adalah f2_score, karena kita menganggap recall dua kali lebih penting daripada precision.
+
+
+## *Conclusion*
+
+- Metric utama yang akan kita gunakan adalah f2_score, karena recall kita anggap dua kali lebih penting daripada precision.
+
+- Berdasarkan pemodelan Logistic Regression, fitur/kolom **Contract** adalah yang paling penting dan berpengaruh terhadap target (Churn), kemudian diikuti dengan **PaperlessBilling**, **InternetService** dan **MonthlyCharges**.
+
+- Berdasarkan contoh perhitungan biaya :
+  
+  - Potensi kerugian yang mungkin didapat tanpa adanya penerapan machine learning diperkirakan sebesar : $30,287.68 per bulan untuk 922 pelanggan
+
+  - Potensi kerugian yang mungkin didapat dengan menerapkan model Logistic Regression yang telah dibuat diperkirakan sebesar : $26,309.08 per bulan untuk 922 pelanggan
+
+  - Potensi kerugian yang mungkin didapat dengan menerapkan model Adaboost Classifier yang telah dibuat diperkirakan sebesar : $26,181.2 per bulan untuk 922 pelanggan.
+
+- Berdasarkan contoh hitungan tersebut, terlihat bahwa dengan menggunakan model kita, maka perusahaan dapat menghemat sebesar :
+
+  - Dengan Model Decision Tree : $3978.59 per bulan untuk 922 pelanggan.
+
+  - Dengan Model Adaboost Classifier : $4106.48 per bulan untuk 922 pelanggan.
+
+  - Memperhitungkan bahwa jumlah pelanggan pada penyedia layanan telekomunikasi dapat mencapai jutaan, tentunya potensi penghematan akan semakin signifikan jika karakteristik pelanggan masih mencakup rentang data yang digunakan dalam proses pemodelan.
+
+
+**Model Limitation**
+
+Model ini hanya berlaku pada rentang data yang digunakan pada pemodelan ini yaitu :
+
+- tenure antara 0 sampai dengan 72 bulan
+- MonthlyCharges antara 18.8 sampai dengan 118.65
+- Contract dalam jangka Month-to-month, One year, dan Two Year
+- InternetService berupa 'DSL', 'Fiber Optic' dan 'No'
+- Dependent, Paperless Billing dengan nilai 'Yes' atau 'No'
+- OnlineSecurity, OnlineBackup, DeviceProtection, dan TechSupport berisi pilihan 'Yes', 'No' atau 'No internet service'.
+
+Pada kasus ini, analisis dan hasil prediksi dari model yang telah dibuat tidak valid untuk :
+
+- tenure lebih besar dari 72 bulan
+- MonthlyCharges kurang dari 18.8 atau lebih besar dari 118.65
+- Jenis Contract selain Month-to-month, One year, dan Two Year
+- InternetService selain 'DSL', 'Fiber Optic' dan 'No'
+- Dependent, Paperless Billing dengan nilai selain 'Yes' atau 'No'
+- OnlineSecurity, OnlineBackup, DeviceProtection, dan TechSupport berisi pilihan selain 'Yes', 'No' atau 'No internet service'.
+
+## *Recommendation*
+
+Beberapa tindakan yang dapat diambil oleh perusahaan untuk mengurangi jumlah pelanggan yang akan berhenti berlangganan (churn) meliputi:
+- Menawarkan insentif atau penghargaan yang menarik bagi pelanggan untuk beralih dari kontrak bulanan ke kontrak tahunan atau dua tahunan.
+- Membuat program loyalitas pelanggan untuk mendorong pelanggan agar tetap berlangganan dan memiliki masa berlangganan yang lama. Program ini dapat berupa pemberian penghargaan yang besarannya disesuaikan dengan masa berlangganan. Semakin lama masa berlangganan, semakin besar penghargaan yang bisa didapat, sehingga mendorong pelanggan untuk memiliki masa berlangganan yang lebih lama.
+- Melakukan survei kepuasan pelanggan secara berkala untuk mengetahui kualitas layanan yang telah diberikan dan melakukan perbaikan jika ada umpan balik negatif.
+
+
+Hal-hal yang bisa dilakukan untuk mengembangkan project dan modelnya lebih baik lagi diantaranya: 
+
+- Menambahkan fitur-fitur atau kolom baru yang dapat mengukur kepuasan pelanggan terhadap masing-masing layanan. Hal ini dapat membantu untuk mengidentifikasi apakah churn disebabkan oleh kualitas layanan yang buruk.
+- Menambahkan fitur-fitur atau kolom baru yang dapat memberikan gambaran tentang penggunaan produk-produk yang ada oleh pelanggan. Dengan demikian, perusahaan dapat melakukan segmentasi pelanggan untuk menentukan produk yang paling sesuai untuk ditawarkan.
+- Menambahkan data untuk kelas minoritas (Churn). Hal ini dapat membantu untuk meningkatkan performa model karena model akan memiliki lebih banyak data untuk dipelajari.
+- Mencoba algoritma ML dan teknik tuning parameter yang berbeda, serta menggunakan teknik oversampling yang berbeda. Dengan demikian, perusahaan dapat menemukan kombinasi yang paling optimal untuk meningkatkan performa model.
+- Menganalisis data-data yang salah diprediksi oleh model. Hal ini dapat membantu untuk mengidentifikasi alasan dan karakteristik data yang salah diprediksi.
